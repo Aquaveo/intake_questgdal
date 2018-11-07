@@ -1,0 +1,35 @@
+package:
+  name: intake-questhdf5
+  version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+  path: ..
+git:
+  depth: false
+
+build:
+  number: {{ GIT_DESCRIBE_NUMBER }}
+  script:
+    - python setup.py install --single-version-externally-managed --record=record.txt
+  noarch: python
+
+requirements:
+  build:
+    - python
+  run:
+    - intake>=0.2
+    - pandas
+
+test:
+  source_files:
+    - tests
+  requires:
+    - pytest
+  commands:
+    - py.test --verbose
+
+about:
+  home: url
+  license: BSD
+  license_file: LICENSE
+  summary: Quest Hdf5 plugin for Intake
